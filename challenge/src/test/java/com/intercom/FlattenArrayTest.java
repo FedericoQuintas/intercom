@@ -118,16 +118,25 @@ public class FlattenArrayTest {
 		secondComposedArray.add(firstArray);
 		secondComposedArray.add(thirdArray);
 
+		List<Object> arrayToFlatten = addItemsToArray(firstArray, secondArray,
+				thirdArray, firstComposedArray, secondComposedArray);
+
+		flattenArray = arrayFlattener
+				.flattenArray(arrayToFlatten, flattenArray);
+
+		Assert.assertEquals(7, flattenArray.size());
+	}
+
+	private List<Object> addItemsToArray(List<Integer> firstArray,
+			List<Integer> secondArray, List<Integer> thirdArray,
+			List<List<Integer>> firstComposedArray,
+			List<List<Integer>> secondComposedArray) {
 		List<Object> arrayToFlatten = new ArrayList<Object>();
 		arrayToFlatten.add(firstArray);
 		arrayToFlatten.add(secondArray);
 		arrayToFlatten.add(thirdArray);
 		arrayToFlatten.add(firstComposedArray);
 		arrayToFlatten.add(secondComposedArray);
-
-		flattenArray = arrayFlattener
-				.flattenArray(arrayToFlatten, flattenArray);
-
-		Assert.assertEquals(7, flattenArray.size());
+		return arrayToFlatten;
 	}
 }
