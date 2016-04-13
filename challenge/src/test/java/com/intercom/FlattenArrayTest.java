@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.intercom.flattener.ArrayFlattener;
+import com.intercom.flattener.validator.ArrayItemValidator;
 
 public class FlattenArrayTest {
 
@@ -17,7 +18,7 @@ public class FlattenArrayTest {
 
 	@Before
 	public void before() {
-		arrayFlattener = new ArrayFlattener();
+		arrayFlattener = new ArrayFlattener(new ArrayItemValidator());
 		arrayToFlatten = new ArrayList<Object>();
 		flattenArray = new ArrayList<Integer>();
 	}
@@ -31,7 +32,7 @@ public class FlattenArrayTest {
 	}
 
 	@Test
-	public void whenArrayHasAnElementThenTheResultIsAnArrayOfOneElement() {
+	public void whenArrayHasAnItemThenTheResultIsAnArrayOfOneItem() {
 		arrayToFlatten.add(1);
 		flattenArray = arrayFlattener
 				.flattenArray(arrayToFlatten, flattenArray);
@@ -39,7 +40,7 @@ public class FlattenArrayTest {
 	}
 
 	@Test
-	public void whenArrayHasAnElementThenTheResultIsAnArrayOfSameElement() {
+	public void whenArrayHasAnItemThenTheResultIsAnArrayOfSameItem() {
 
 		arrayToFlatten.add(1);
 		flattenArray = arrayFlattener
@@ -48,9 +49,9 @@ public class FlattenArrayTest {
 	}
 
 	@Test
-	public void whenArrayHasANullElementThenIllegalArgumentExceptionIsThrown() {
+	public void whenArrayHasANullItemThenIllegalArgumentExceptionIsThrown() {
 
-		String exceptionMessage = "Array contains null elements";
+		String exceptionMessage = "Array contains null Items";
 		arrayToFlatten.add(null);
 		try {
 			flattenArray = arrayFlattener.flattenArray(arrayToFlatten,
@@ -63,7 +64,7 @@ public class FlattenArrayTest {
 	@Test
 	public void whenArrayIsComposedByTwoArraysAndOneContainsNullThenIllegalArgumentExceptionIsThrown() {
 
-		String exceptionMessage = "Array contains null elements";
+		String exceptionMessage = "Array contains null Items";
 		List<Integer> firstArray = new ArrayList<Integer>();
 		firstArray.add(1);
 		List<Integer> secondArray = new ArrayList<Integer>();
