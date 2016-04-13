@@ -12,6 +12,7 @@ import com.intercom.flattener.validator.ArrayItemValidator;
 
 public class FlattenArrayTest {
 
+	private static final String WORD = "Word";
 	private ArrayFlattener arrayFlattener;
 	private List<Integer> flattenArray;
 	private List<Object> arrayToFlatten;
@@ -61,6 +62,19 @@ public class FlattenArrayTest {
 		}
 	}
 
+	@Test
+	public void whenArrayHasANotNumericItemThenIllegalArgumentExceptionIsThrown() {
+
+		String exceptionMessage = "Array contains not numeric Items";
+		arrayToFlatten.add(WORD);
+		try {
+			flattenArray = arrayFlattener.flattenArray(arrayToFlatten,
+					flattenArray);
+		} catch (IllegalArgumentException exception) {
+			Assert.assertEquals(exceptionMessage, exception.getMessage());
+		}
+	}
+	
 	@Test
 	public void whenArrayIsComposedByTwoArraysAndOneContainsNullThenIllegalArgumentExceptionIsThrown() {
 
