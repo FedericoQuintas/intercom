@@ -1,4 +1,4 @@
-package com.location.domain;
+package com.intercom.location.domain;
 
 public class Location {
 

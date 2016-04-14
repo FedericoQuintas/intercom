@@ -1,4 +1,4 @@
-package com.intercom;
+package com.intercom.json;
 
 import java.io.IOException;
 import java.util.List;
@@ -14,6 +14,7 @@ import com.intercom.json.JSONReader;
 
 public class JSONReaderTest {
 
+	private static final String FILE_PATH = "src/test/resources/customers-test.txt";
 	private static JSONReader jsonReader;
 	private static List<Customer> customers;
 
@@ -22,7 +23,7 @@ public class JSONReaderTest {
 			JsonMappingException, IOException {
 
 		jsonReader = new JSONReader();
-		customers = jsonReader.read("src/test/resources/customers-test.txt",
+		customers = jsonReader.read(FILE_PATH,
 				Customer.class);
 
 	}

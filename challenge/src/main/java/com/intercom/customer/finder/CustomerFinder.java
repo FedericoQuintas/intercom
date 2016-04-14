@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.intercom.customer.domain.Customer;
-import com.location.domain.Location;
+import com.intercom.location.domain.Location;
 
 public class CustomerFinder {
 
@@ -22,6 +22,7 @@ public class CustomerFinder {
 			evaluateCustomerDistance(distance, location,
 					customersWithinDistance, customer);
 		}
+		
 		return customersWithinDistance;
 	}
 

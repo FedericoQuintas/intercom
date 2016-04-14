@@ -1,6 +1,7 @@
-package com.intercom;
+package com.intercom.customer.service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.codehaus.jackson.JsonParseException;
@@ -13,7 +14,7 @@ import org.junit.Test;
 import com.intercom.customer.domain.Customer;
 import com.intercom.customer.finder.CustomerFinder;
 import com.intercom.json.JSONReader;
-import com.location.domain.Location;
+import com.intercom.location.domain.Location;
 
 public class CustomerFinderTest {
 	private static final String INVALID_CUSTOMERS = "Invalid customers";
@@ -55,6 +56,22 @@ public class CustomerFinderTest {
 		List<Customer> customersWithinDistance = customerFinder.find(customers,
 				distanceRequiredInKm, officeLocation);
 		Assert.assertTrue(customersWithinDistance.isEmpty());
+	}
+
+	@Test
+	public void whenAsksForCustomersWithinTwentyKMThenReturnsACustomer() {
+		int distanceRequiredInKm = 20;
+		List<Customer> customersWithinDistance = customerFinder.find(customers,
+				distanceRequiredInKm, officeLocation);
+		Assert.assertEquals(1, customersWithinDistance.size());
+	}
+
+	@Test
+	public void whenAsksForCustomersWithinAHundredKMThenReturns16Customers() {
+		int distanceRequiredInKm = 100;
+		List<Customer> customersWithinDistance = customerFinder.find(customers,
+				distanceRequiredInKm, officeLocation);
+		Assert.assertEquals(16, customersWithinDistance.size());
 	}
 
 	@Test
@@ -115,9 +132,8 @@ public class CustomerFinderTest {
 	public void whenAsksForEmptyCustomersThenExceptionIsThrown() {
 		Integer distanceRequiredInKm = 10;
 		try {
-			customers.clear();
-			customerFinder
-					.find(customers, distanceRequiredInKm, officeLocation);
+			customerFinder.find(new ArrayList<Customer>(),
+					distanceRequiredInKm, officeLocation);
 		} catch (IllegalArgumentException exception) {
 			Assert.assertEquals(INVALID_CUSTOMERS, exception.getMessage());
 		}
